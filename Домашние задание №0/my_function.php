@@ -1,5 +1,5 @@
 <?php
-function Show_something()
+function showSomething()
 { 
     return 'SOMETHING';
 }

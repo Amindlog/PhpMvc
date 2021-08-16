@@ -1,8 +1,8 @@
 <?php
 include "my_function.php";
-const TESTCONSTANTA = 'asdad';
+const TEST_CONSTANTA = 'asdad';
 
-$user_name = 'Igor';
+$userName = 'Igor';
 
 
 

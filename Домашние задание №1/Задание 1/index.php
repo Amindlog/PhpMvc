@@ -2,7 +2,7 @@
 
     $name = "alex";
 
-    $age = "35";
+    $age = 35;
 
     echo "My neme: ". $name . "<br>";
     echo "Мне: ". $age ."<br>";

@@ -5,8 +5,6 @@
 
     define("KARANDASH", 40);
 
-    $kraski = '';
-
     $kraski = VSEGO - (FLOMASTER + KARANDASH);
 
     echo "Выполнено работ красками: ". $kraski;
