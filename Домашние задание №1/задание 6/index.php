@@ -5,9 +5,7 @@
            echo "<tr>";
             for ($j = 0; $j <= 10; $j++) 
             { 
-                if ($i != 0 && $j != 0) {
-                    echo "<td>". $i * $j . "</td>";
-                }                
+                echo "<td>". $i * $j . "</td>";         
             }
             echo "<tr>";
        }
