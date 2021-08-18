@@ -15,7 +15,11 @@
         }
     }
 
-    print_r(task1(["hello", "i", "amind"]));
+    function myFucn($str, $st, $par)
+    {
+        $str .= $st . " " . $par. " ";
+        return $str;
+    }
 
     function task2($params)
     {
@@ -28,7 +32,7 @@
                 { 
                     if ($i != sizeof($params)-1) 
                     {
-                        $str .= $params[$i]. " " . $params[0] . " ";
+                        $str = myFucn($str, $params[$i], $params[0]);
                     }
                     else
                     {
@@ -45,7 +49,7 @@
                 { 
                     if ($i != sizeof($params)-1) 
                     {
-                        $str .= $params[$i]. " " . $params[0] . " ";
+                        $str = myFucn($str, $params[$i], $params[0]);
                     }
                     else
                     {
@@ -62,7 +66,7 @@
                 { 
                     if ($i != sizeof($params)-1) 
                     {
-                        $str .= $params[$i]. " " . $params[0] . " ";
+                        $str = myFucn($str, $params[$i], $params[0]);
                     }
                     else
                     {
@@ -79,7 +83,7 @@
                 { 
                     if ($i != sizeof($params)-1) 
                     {
-                       $str .= $params[$i]. " " . $params[0] . " ";
+                        $str = myFucn($str, $params[$i], $params[0]);
                     }
                     else
                     {
@@ -96,6 +100,8 @@
         }
     }
     
+task2("+", 1, 2, 3, 5.2);
+
 
     function task3($x = null, $y = null)
     {
