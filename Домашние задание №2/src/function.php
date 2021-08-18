@@ -1,22 +1,21 @@
 <?php
-    function task1($array_string, $is_boolean_type = false)
+    function task1($arrayString, $isBooleanType = false)
     {
-        if(!$is_boolean_type)
+        if(!$isBooleanType)
         {
-            for ($i = 0; $i < sizeof($array_string) ; $i++)
-            { 
-               echo "<p>" . $array_string[$i] . "</p>"; 
+            foreach ($arrayString as $key => $value)
+            {
+                echo "<p>" . $value . "</p>"; 
             }
         }
         else
         {
-            for ($i = 0; $i < sizeof($array_string) ; $i++)
-            { 
-                $str .= $array_string[$i]. " ";
-            }
+            $str = implode(" ", $arrayString);
             return $str;
         }
     }
+
+    print_r(task1(["hello", "i", "amind"]));
 
     function task2($params)
     {
@@ -35,12 +34,62 @@
                     {
                         $str .= $params[$i]. " ";
                     }
-                    
                     $sum += $params[$i];
                 }
-                 echo $str .= " = " . $sum;
+                echo $str .= " = " . $sum;
                 break;
-            
+
+            case '*':
+                $str_To_Print = "Результат: "; 
+                for ($i = 1; $i < sizeof($params); $i++)
+                { 
+                    if ($i != sizeof($params)-1) 
+                    {
+                        $str .= $params[$i]. " " . $params[0] . " ";
+                    }
+                    else
+                    {
+                        $str .= $params[$i]. " ";
+                    } 
+                        $sum *= $params[$i];
+                }
+                echo $str .= " = " . $sum;
+                break;
+
+            case '/':
+                $str_To_Print = "Результат: "; 
+                for ($i = 1; $i < sizeof($params); $i++)
+                { 
+                    if ($i != sizeof($params)-1) 
+                    {
+                        $str .= $params[$i]. " " . $params[0] . " ";
+                    }
+                    else
+                    {
+                        $str .= $params[$i]. " ";
+                    } 
+                        $sum /= $params[$i];
+                }
+                echo $str .= " = " . $sum;
+                break;
+
+            case '-':
+                $str_To_Print = "Результат: "; 
+                for ($i = 1; $i < sizeof($params); $i++)
+                { 
+                    if ($i != sizeof($params)-1) 
+                    {
+                       $str .= $params[$i]. " " . $params[0] . " ";
+                    }
+                    else
+                    {
+                        $str .= $params[$i]. " ";
+                    } 
+                        $sum -= $params[$i];
+                }
+                echo $str .= " = " . $sum;
+                break;
+
             default:
                 echo "работаем по заданию";
                 break;
@@ -50,7 +99,7 @@
 
     function task3($x = null, $y = null)
     {
-        if(isset($x) && isset($y) && $x == $y)
+        if(empty($x) && empty($y) && $x == $y)
         {
             echo "<table>";
             for ($i = 1; $i <= $x; $i++)
