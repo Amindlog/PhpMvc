@@ -99,8 +99,11 @@
 
     function task3($x = null, $y = null)
     {
-        if(empty($x) && empty($y) && $x == $y)
+        if($x != $y || $x < 1)
         {
+            echo "какие то не поладки";
+            return null;
+        }
             echo "<table>";
             for ($i = 1; $i <= $x; $i++)
             { 
@@ -112,11 +115,6 @@
                 echo "</tr>";
             }
             echo "</table>";
-        }
-        else
-        {
-            echo "какие то не поладки";
-        }
     }
 
 
