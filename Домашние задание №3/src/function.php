@@ -19,26 +19,25 @@
 function task1()
 {
     $arrayName = ["Маша", "Саша", "Женя", "Чудо", "Name"];
-    
+
     $userName[] = '';
 
     for ($i = 0; $i < 50; $i++) {
-        array_push($userName,
-        [
+        array_push(
+            $userName,
+            [
             "id" => $i,
             "name" => array_rand($arrayName),
             "age" => rand(18, 45)
-        ]);        
+            ]
+        );
     }
 
     $fileN = "users.json";
 
-    if (!file_exists($fileN)){
-
+    if (!file_exists($fileN)) {
         file_put_contents($fileN, json_encode($userName));
-    }else {
-
-
+    } else {
         unlink($fileN);
 
         file_put_contents($fileN, json_encode($userName));
@@ -47,12 +46,10 @@ function task1()
     $decode = json_decode(file_get_contents($fileN), true);
 
     foreach ($decode as $key => $value) {
-
-        var_dump( $value );
-        
+        var_dump($value);
     }
 
-    
+
 
     // for ($i = 0; $i < 50; $i++) {
     //     echo "<pre>";
