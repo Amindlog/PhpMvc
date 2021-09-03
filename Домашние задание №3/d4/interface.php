@@ -1,4 +1,5 @@
 <?php
+
 /** interface */
 interface iTariff
 {
@@ -10,7 +11,7 @@ interface iTariff
 
 interface iService
 {
-    public function editSum(iTariff $tariff,&$price);
+    public function editSum(iTariff $tariff, &$price);
 }
 /** end interface */
 
@@ -31,7 +32,6 @@ abstract class baseTariff implements iTariff
 
     public function setDistanse($distances)
     {
-
         $this->distance = $distances;
     }
 
@@ -46,12 +46,12 @@ abstract class baseTariff implements iTariff
 
         if ($this->services) {
             foreach ($this->services as $service) {
-                $service->editSum($this,$price);
+                $service->editSum($this, $price);
             }
         }
         return $price;
     }
-    public function addService(iService $service):iTariff
+    public function addService(iService $service): iTariff
     {
         array_push($this->services, $service);
         return $this;
