@@ -33,7 +33,7 @@ function connect()
     }
 }
 
-function getUser()//true or false 
+function getUser() //true or false 
 {
     $smt = connect()->prepare("SELECT * FROM user WHERE `user_email` = ?");
     $smt->execute([$_POST['email']]);
@@ -41,7 +41,7 @@ function getUser()//true or false
     if (!empty($result->user_email)) {
         return true;
     }
-        return false;
+    return false;
 }
 
 function addUser()
@@ -65,20 +65,21 @@ function addUser()
                             :floor
                             )";
     connect()->prepare($sql)->execute([
-                'name' => $_POST['name'],
-                'phone' => $_POST['phone'],
-                'email' => $_POST['email'],
-                'street' => $_POST['street'],
-                'home' => $_POST['home'],
-                'casing' => $_POST['part'],
-                'flat' => $_POST['appt'],
-                'floor' => $_POST['floor']]);
+        'name' => $_POST['name'],
+        'phone' => $_POST['phone'],
+        'email' => $_POST['email'],
+        'street' => $_POST['street'],
+        'home' => $_POST['home'],
+        'casing' => $_POST['part'],
+        'flat' => $_POST['appt'],
+        'floor' => $_POST['floor']
+    ]);
 }
 
 function addOrder()
 {
     if (!isset($_POST['callback'])) {
-       $_POST['callback'] = 'off';
+        $_POST['callback'] = 'off';
     }
     $sql = "INSERT INTO `order` (
                     `order_comment`,
@@ -96,9 +97,9 @@ function addOrder()
             'comment' => $_POST['comment'],
             'payment' => $_POST['payment'],
             'callback' => $_POST['callback'],
-            'user_id' => connect()->query("SELECT `user_id`, `user_email` FROM `user` WHERE `user_email` = '".$_POST['email']."'")->fetch(PDO::FETCH_ASSOC)['user_id']
+            'user_id' => connect()->query("SELECT `user_id`, `user_email` FROM `user` WHERE `user_email` = '" . $_POST['email'] . "'")->fetch(PDO::FETCH_ASSOC)['user_id']
         ]
-        );
+    );
 }
 
 function sandMessage()
@@ -108,29 +109,28 @@ function sandMessage()
 
     $query = connect()->prepare($sql);
     $query->execute([$_POST['email']]);
-    
+
     $count = $query->fetch(PDO::FETCH_ASSOC);
 
-    $str = "ул. ".$count['user_street']. ", Дом: " . $count['user_home'];
+    $str = "ул. " . $count['user_street'] . ", Дом: " . $count['user_home'];
 
-        if (!empty($count['user_casing'])) {
-            $str .= " Корпус: {$count['user_casing']} ";
-        }
+    if (!empty($count['user_casing'])) {
+        $str .= " Корпус: {$count['user_casing']} ";
+    }
 
     $str .= ", Этаж: {$count['user_flat']}, Квартра: {$count['user_floor']} <br>";
 
     echo "Спасибо, ваш заказ будет доставлен по адресу: {$str}";
-    echo "Номер вашего заказа: ".connect()->lastInsertId()."<br>";
+    echo "Номер вашего заказа: " . connect()->lastInsertId() . "<br>";
     echo "Это ваш {$count['count(*)']}-й заказ!";
 }
 
 //проверяем существует ли пользователь 
-if(!getUser()){
+if (!getUser()) {
     addUser();
     addOrder();
     sandMessage();
-}else{
+} else {
     addOrder();
     sandMessage();
 }
-  

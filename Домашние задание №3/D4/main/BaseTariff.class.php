@@ -2,5 +2,6 @@
 
 class BaseTariff extends AbsTariff
 {
-    protected $priceForKm;
+    protected $priceForKm = 3;
+    protected $priceForMinute = 10;
 }

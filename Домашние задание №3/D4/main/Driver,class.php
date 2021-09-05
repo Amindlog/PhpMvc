@@ -1,28 +1,20 @@
 <?php
 class Driver implements InterfaceService
 {
-    private $driverCount = 1;
     private $driverPrice = 100;
 
     public function servicePlus(): int
     {
-        if ($this->getiClock() > 60) {
-            # code...
-        }
-        return ceil($this->getiClock() * 60) * $this->getItimes(); //узнаем минуты * на время ????????????
+        return $this->getDriverPrice();
     }
 
-    private function setDriverCount($driverCount)
-    {
-        $this->driverCount = $driverCount;
-    }
 
     private function setDriverPrice($driverPrice)
     {
         $this->driverPrice = $driverPrice;
     }
 
-    public function getDriverCount(): float
+    public function getDriverPrice(): float
     {
         return $this->driverPrice;
     }
