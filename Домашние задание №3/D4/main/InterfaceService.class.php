@@ -1,5 +1,5 @@
 <?php
 interface InterfaceService
 {
-    public function servicePlus();
+    public function Values(): int;
 }

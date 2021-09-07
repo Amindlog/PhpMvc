@@ -1,8 +1,9 @@
 <?php
-class BaseTariff extends AbsTariff
+
+class Student extends AbsTariff
 {
-    private $priceForKm = 10;
-    private $priceForMinute = 3;
+    private $priceForKm = 4;
+    private $priceForMinute = 1;
 
     public function __construct($km, $min)
     {

@@ -1,40 +1,30 @@
 <?php
-
 class Gps implements InterfaceService
 {
-    private $iClock; // в часах
-    private $iTimes = 60;
+    private $priceToClock = 15;
+    private $timesClock; //минут
 
-    public function __construct(float $iClock, float $iTimes)
+    public function __construct($times)
     {
-        $this->setIdistanse($iClock);
-        $this->setItimes($iTimes);
-    }
-
-    private function setIdistanse(float $iClock)
-    {
-        $this->iClock = $iClock;
-    }
-    private function setItimes(float $iTimes)
-    {
-        $this->iTimes = $iTimes;
+        $this->setTimesClock($times);
     }
 
-    private function getiClock(): float
+    public function setTimesClock($times)
     {
-        return $this->iClock;
-    }
-    private function getItimes(): float
-    {
-        return $this->iTimes;
+        $this->timesClock = $times;
     }
 
-    //идея взять значения от тарифа и пепевесии минуты и умножить на значение минут 
-    public function servicePlus(): int
+    public function getTimesClock(): int
     {
-        if ($this->getiClock() > 60) {
-            # code...
-        }
-        return ceil($this->getiClock() * 60) * $this->getItimes(); //узнаем минуты * на время ????????????
+        return $this->timesClock;
+    }
+
+    public function Values(): int
+    {
+        return $this->timesClock / 60 * $this->priceToClock;
     }
 }
+
+//$gps = new Gps(15)->Values();
+// or $gps = new Gps(15);
+//$gps->Values(); значение сервиса gps
