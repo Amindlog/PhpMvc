@@ -1,0 +1,15 @@
+<?php
+
+/** @var \App\Model\User $users */
+$user = $this->users;
+?>
+
+<?php if ($user) : ?>
+
+    name: <?= $user->name; ?>
+    gender: <?= $user->getGenderString(); ?>
+    register: <?= $user->getCreateAt(); ?>
+
+<?php else : ?>
+    Not found user.
+<?php endif; ?>
