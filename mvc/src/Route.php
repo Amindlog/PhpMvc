@@ -1,72 +1,57 @@
 <?php
-    namespace Core;
 
-    class Route
+namespace Core;
+
+use app\Controller\Blog;
+use app\Controller\User;
+use Exception;
+
+class Route
+{
+    private $controllerName;
+    private $actionName;
+    private $processed = false;
+    private $routes;
+
+    private function  process()
     {
-        /**@var */
-        private $controllerName;
-        private $actionName;
-        private $processed = false;
-        private $routes;
+        if (!$this->processed) {
 
-
-        private function process()
-        {
-            $pars = parse_url($_REQUEST['REQUEST_URI']);//return array $path and string /var
-            $path = $pars['path'];
-            if(($route = $this->routes[$path] ?? null) !== null){//так правельней
-            //if (isset($this->routes[$path])) {
-                $this->controllerName = $route[0];
-                $this->actionName = $route[1];
+            $paths = parse_url($_SERVER['REQUEST_URI']);
+            $path = $paths['path'];
+            if (isset($this->routes[$path])) {
+                $this->controllerName = $this->routes[$path][0];
+                $this->actionName = $this->routes[$path][1];
+            } else {
+                $parts = explode("/", $path);
+                $this->controllerName = '\\App\\Controller\\' . ucfirst(strtolower($parts[1]));
+                $this->actionName = strtolower($parts[2]) ?? 'index';
             }
-        switch ($pars['path']) {
-                case '/user/login':
-                    
-                    $controller = new User();
-                    $controller->loginAction();
-                    
-                    break;
-                
-                case '/user/register':
-
-                    $controller = new User;
-                    $controller->registerAction();
-
-                    break;
-
-                case '/Blog/index':
-                    
-                    $controller = new Blog;
-                    $controller->indexAction();
-
-                    break;   
-                default:
-                    header("HTTP/2.0 404 Not Found.");
-                    break;
-                }
-    
-    }
-
-        public function getControllerName(): string
-        {
-            if (!$this->protected) {
-                $this->protected;
-            }
-            return $this->controllerName;
-        }
-
-        public function getActionName(): string
-        {
-            if (!$this->protected) {
-                $this->protected;
-            }
-            return $this->actionName. "Action";
-        }
-        public function addRoute($path,$controllerName, $actionName)
-        {
-            $this->routes[$path] = [
-                $controllerName,
-                $actionName
-            ];
+            $this->processed = true;
         }
     }
+
+    public function addRoute($path, $controllerName, $actionName)
+    {
+        $this->routes[$path] = [
+            $controllerName,
+            $actionName
+        ];
+    }
+
+    public function getControllerName(): string
+    {
+        if (!$this->processed) {
+            $this->process();
+        }
+        return $this->controllerName;
+    }
+
+    public function getActionName(): string
+    {
+        if (!$this->processed) {
+            $this->process();
+        }
+        return $this->actionName . "Action";
+    }
+}
